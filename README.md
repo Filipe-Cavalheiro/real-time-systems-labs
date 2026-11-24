@@ -6,8 +6,8 @@ Three lab projects, each controlling a simulated industrial plant through digita
 plants, the simulator server, FreeRTOS and the NI-DAQ interface libraries were provided by the
 course and are **not** included here; this repository holds only our code, so it reads as a
 reference rather than building on its own. The clips below were recorded from the course's web
-simulators, driven through their I/O ports by a short script (for the warehouse, a closed loop on
-the position sensors), to show the plants.
+simulators, driven through their I/O ports by a short closed-loop script on the simulators' sensors that
+follows the same steps as our code, to show the plants.
 
 ## 1. Splitter conveyor (`1-splitter-conveyor/`)
 
@@ -25,10 +25,12 @@ the right lane, and wrong bricks are rejected. Written as FreeRTOS tasks on the 
 `my_interaction_functions.*` wraps the port I/O (bit reads and writes, cylinder and conveyor
 commands).
 
-<a href="media/conveyor.mp4"><img src="media/conveyor.gif" width="480" alt="The splitter-conveyor simulator: bricks are pushed onto the belt by the entry cylinder and carried past the two sorting cylinders."></a>
+<a href="media/conveyor.mp4"><img src="media/conveyor.gif" width="480" alt="The splitter-conveyor simulator sorting bricks: cylinder 1 pushes bricks into dock 1, cylinder 2 into dock 2."></a>
 
-*The course's splitter-conveyor simulator: the entry cylinder pushes bricks onto the belt, which
-carries them past the two sorting cylinders. ([MP4](media/conveyor.mp4))*
+*The course's splitter-conveyor simulator sorting bricks (2× speed): the type is read from the
+magnetic sensors as each brick passes, then cylinder 1 pushes type-0 bricks into dock 1 and
+cylinder 2 pushes type-1 bricks into dock 2, following the logic of `vTask_brickSorter` and
+`vTask_magSensors`. ([MP4](media/conveyor.mp4))*
 
 ## 2. Automated pallet storage (`2-pallet-storage/`)
 
