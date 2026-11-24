@@ -6,7 +6,8 @@ Three lab projects, each controlling a simulated industrial plant through digita
 plants, the simulator server, FreeRTOS and the NI-DAQ interface libraries were provided by the
 course and are **not** included here; this repository holds only our code, so it reads as a
 reference rather than building on its own. The clips below were recorded from the course's web
-simulators driven through their I/O ports by a short scripted sequence, to show the plants.
+simulators, driven through their I/O ports by a short script (for the warehouse, a closed loop on
+the position sensors), to show the plants.
 
 ## 1. Splitter conveyor (`1-splitter-conveyor/`)
 
@@ -41,10 +42,12 @@ reaching the hardware ports through a JNI DLL written in C:
 - `jni/`: `storage_jni.c` exports the `Storage` class's native methods (axis movement, sensor
   reads, LEDs) on top of the course's port interface.
 
-<a href="media/storage.mp4"><img src="media/storage.gif" width="400" alt="The pallet-storage simulator: the stacker crane carries a pallet along the X axis and lifts it towards the shelves."></a>
+<a href="media/storage.mp4"><img src="media/storage.gif" width="400" alt="The pallet-storage simulator: the stacker crane takes a pallet to column 3, level 2, leaves it on the shelf and returns home."></a>
 
-*The course's pallet-storage simulator: the stacker crane carries a pallet along X and lifts it
-towards the shelves. ([MP4](media/storage.mp4))*
+*The course's pallet-storage simulator storing a pallet: the crane takes it to column 3, level 2,
+slides the fork in, lowers to leave it on the shelf, pulls the fork back and returns home (2×
+speed). The sequence follows the steps of `putPartInCell` in `Mechanism.java`.
+([MP4](media/storage.mp4))*
 
 ## 3. Car wash (`3-car-wash/`)
 
